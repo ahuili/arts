@@ -2,7 +2,8 @@
 
 ## Algorithm
 
-见`algo`目录下`two-sum`
+见`algo`目录下`add-two-numbers`
+这个最开始写理解错题目意思了，导致走了冤枉路，两数相加的时候，链表本来就是逆向的，正好按照顺序两两相加就好了，我理解成需要先倒序然后再加再倒序。下次注意理解题意。
 
 ## Review
 
@@ -14,29 +15,10 @@
 
    好的日志可以在需要的时候帮助我们，他对于我们处理错误的能力是非常重要的。
 
-2. 第三
-
 ## Tip
 
-配置`supervisor`
-使用`supervisor`管理`flask`的`uwsgi`, 刚开始怎么都管理不了，启动报错
-`FALTAL error ocurred when uwsgi works with superviso`。
-最后发现是由于`uwsgi.ini`配置文件中`daemonize = /home/www/logs/uwsgi.log` 日志文件 可能启用了后端进程，把他修改为`logto = /home/www/logs/uwsgi.log`就`ok`了。
-还有一点，之前一直一位`uwsgi`不能平滑重启，这次使用中知道了 `uwsgi --reload /var/uwsgi/uwsgi.pid`
+由于项目需要，使用`multiprocessing` 多进程并行计算
 
 ## Share
 
-python 获取文件字符编码类型
-
-```
-import chardet
-# 获取文件编码类型
-def get_encoding(file):
-    # 二进制方式读取，获取字节数据，检测类型
-    with open(file, 'rb') as f:
-        return chardet.detect(f.read())['encoding']
-
-file_name = 'data.sav'
-encoding = get_encoding(file_name)
-print(encoding)
-```
+在使用`multiprocessing`的进程池 `Pool` 的时候，测试确实产生了多个进程，但是多个核还是没有利用上，目前还比较困惑，后面再深入探究。
